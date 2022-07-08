@@ -5,54 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
-    <style>
-	    body {
-	        font-family: sans-serif;
-	        font-size: 14px;
-	    }
-	    #result {
-	    	display: flex;
-	    	justify-content: flex-start;
-	    	flex-wrap: wrap;
-	    }
-	    .user-group {
-	    	background: #eee;
-	    	border-radius: 8px;
-	    	width: 31.3%;
-	    	margin: 4px;
-	    	padding: 8px;
-	    }
-	    h1 {
-	    	text-align: center;
-	    	color: teal;
-	    }
-	    h2 {
-	    	text-align: center;
-	    	font-weight: bold;
-	    	font-size: 99%;
-	    }
-	    p {
-	    	text-align: center;
-	    }
-	    .img-profile {
-	    	display: flex;
-	    	justify-content: center;
-	    }
-	    img {
-	    	border-radius: 50%;
-	    }
-	    .form-search {
-	    	display: flex;
-	    	justify-content: center;
-	    	margin-bottom: 12px;
-	    	flex-direction: column;
-	    	align-items: center;
-	    }
-	    input {
-	    	padding: 8px;
-	    	width: 500px;
-	    }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -62,60 +15,7 @@
     	<p id="result-count"></p>
     </div>
     <div id="result"></div>
-
-    <script>
-    const endpoint = "https://reqres.in/api/users?per_page=12";
-    const container = document.getElementById("result");
-    const searching = document.getElementById("search");
-    const resultCount = document.getElementById("result-count");
-    let allUsers = [];
-
-    const showUserList = () => {
-        const list = allUsers.map((user) => {
-            return `
-				<div class='user-group'>
-					<div class="img-profile">
-						<img src="${user.avatar}" alt="avatar-${user.first_name}">
-					</div>
-					<h2>${user.first_name} ${user.last_name}</h2>
-					<p>${user.email}</p>
-				</div>
-			`;
-        }).join("");
-        container.innerHTML = list;
-    }
-
-    const findUserList = (key) => {
-        const list = allUsers.map((user) => {
-            return user.first_name.toLowerCase().includes(key.toLowerCase()) ? `
-				<div class='user-group'>
-					<div class="img-profile">
-						<img src="${user.avatar}" alt="avatar-${user.first_name}">
-					</div>
-					<h2>${user.first_name} ${user.last_name}</h2>
-					<p>${user.email}</p>
-				</div>
-			` : "";
-        }).join("");
-        container.innerHTML = list;
-        const userGroup = document.getElementsByClassName("user-group");
-        resultCount.innerHTML = userGroup.length + " user(s) found";
-    }
-
-    const findUsers = searching.addEventListener("keyup", function() {
-    	this.value !== null ? findUserList(this.value) : showUserList();
-    });
-
-    fetch(endpoint)
-        .then(function(response) {
-            return response.json();
-        }).catch((err) => {
-            console.log(err);
-        }).then(function(userList) {
-            allUsers = userList.data
-            showUserList();
-        });
-    </script>
+    <script src="users.js" type="text/javascript"></script>
 </body>
 
 </html>
