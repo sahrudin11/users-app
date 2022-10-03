@@ -9,7 +9,7 @@ const showUserList = () => {
         return `
                 <div class='user-group'>
                     <div class="img-profile">
-                        <img src="${user.avatar}" alt="avatar-${user.first_name}">
+                        <img src="${user.avatar}" alt="avatar-${user.last_name}">
                     </div>
                     <h2>${user.first_name} ${user.last_name}</h2>
                     <p>${user.email}</p>
@@ -52,4 +52,6 @@ const getUserData = () => {
         });
 }
 
-getUserData();
+window.onload = () => {
+    getUserData();
+}
